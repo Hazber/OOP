@@ -20,6 +20,7 @@ namespace Laba1
         private static string[] Names = { "Name",  "Category","Price", "Count", "Country" };
         private static int[] Length = { 200, 160, 120, 150, 150 };
         public static Creator[] Creators = { new BottleCreator(), new High_AlchololCreator(), new Low_AlchololCreator(), new Medium_AlchololCreator(), new UserDrinkCreator() };
+        public static FileCreator[] FileCreators = { new BinFileCreator(), new JsonFileCreator(), new TextFileCreator() };
         public FMenu()
         {
             InitializeComponent();
@@ -37,6 +38,8 @@ namespace Laba1
             {
                CBType.Items.Add(index);
             }
+            SVD.Filter = "Binary file|*.bin|Json file|*.json|Lehason|*.lehason";
+            OFD.Filter = "Binary file|*.bin|Json file|*.json|Lehason|*.lehason";
         }
         public void AddObject(object Obj, int index)
         {
@@ -51,7 +54,7 @@ namespace Laba1
             }
             ShowListView();
         }
-
+      
         private void ShowListView()
         {
             int index = 0;
@@ -178,5 +181,36 @@ namespace Laba1
             }
         }
 
+        private void ПососатьКакToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (SVD.ShowDialog() == DialogResult.Cancel)
+                return;
+            string filename = SVD.FileName;
+            byte[] data = FileCreators[SVD.FilterIndex - 1].FileSave(Catalog);
+            using (FileStream fs = new FileStream(filename, FileMode.Create))
+            {
+                fs.Write(data, 0, data.Length);
+            }
+        }
+
+        private void РаздвинутьToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (OFD.ShowDialog() == DialogResult.Cancel)
+                return;
+            string filename = OFD.FileName;
+            byte[] data = null;
+            using (FileStream fs = new FileStream(filename, FileMode.Open))
+            {
+                data = new byte[(int)fs.Length];
+                fs.Read(data, 0, data.Length);
+            }
+            Catalog = FileCreators[OFD.FilterIndex - 1].FileOpen(data);
+            ShowListView();
+        }
+
+        private void ToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

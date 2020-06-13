@@ -35,6 +35,15 @@
             this.BChange = new System.Windows.Forms.Button();
             this.BDel = new System.Windows.Forms.Button();
             this.CBType = new System.Windows.Forms.ComboBox();
+            this.OFD = new System.Windows.Forms.OpenFileDialog();
+            this.SVD = new System.Windows.Forms.SaveFileDialog();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.хуевПоглотатьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.пососатьКакToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.раздвинутьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.володяКучеренкоГейToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // NameLabel
@@ -109,6 +118,58 @@
             this.CBType.Size = new System.Drawing.Size(164, 21);
             this.CBType.TabIndex = 8;
             // 
+            // OFD
+            // 
+            this.OFD.FileName = "openFileDialog1";
+            // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem1,
+            this.хуевПоглотатьToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(800, 24);
+            this.menuStrip1.TabIndex = 9;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.пососатьКакToolStripMenuItem,
+            this.раздвинутьToolStripMenuItem});
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(48, 20);
+            this.toolStripMenuItem1.Text = "Файл";
+            this.toolStripMenuItem1.Click += new System.EventHandler(this.ToolStripMenuItem1_Click);
+            // 
+            // хуевПоглотатьToolStripMenuItem
+            // 
+            this.хуевПоглотатьToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.володяКучеренкоГейToolStripMenuItem});
+            this.хуевПоглотатьToolStripMenuItem.Name = "хуевПоглотатьToolStripMenuItem";
+            this.хуевПоглотатьToolStripMenuItem.Size = new System.Drawing.Size(12, 20);
+            // 
+            // пососатьКакToolStripMenuItem
+            // 
+            this.пососатьКакToolStripMenuItem.Name = "пососатьКакToolStripMenuItem";
+            this.пососатьКакToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.пососатьКакToolStripMenuItem.Text = "Сохранить как";
+            this.пососатьКакToolStripMenuItem.Click += new System.EventHandler(this.ПососатьКакToolStripMenuItem_Click);
+            // 
+            // раздвинутьToolStripMenuItem
+            // 
+            this.раздвинутьToolStripMenuItem.Name = "раздвинутьToolStripMenuItem";
+            this.раздвинутьToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.раздвинутьToolStripMenuItem.Text = "Открыть";
+            this.раздвинутьToolStripMenuItem.Click += new System.EventHandler(this.РаздвинутьToolStripMenuItem_Click);
+            // 
+            // володяКучеренкоГейToolStripMenuItem
+            // 
+            this.володяКучеренкоГейToolStripMenuItem.Name = "володяКучеренкоГейToolStripMenuItem";
+            this.володяКучеренкоГейToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
+            this.володяКучеренкоГейToolStripMenuItem.Text = "Володя Кучеренко гей";
+            // 
             // FMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -121,8 +182,12 @@
             this.Controls.Add(this.BAdd);
             this.Controls.Add(this.Orders);
             this.Controls.Add(this.NameLabel);
+            this.Controls.Add(this.menuStrip1);
+            this.MainMenuStrip = this.menuStrip1;
             this.Name = "FMenu";
             this.Text = "Form1";
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -137,6 +202,14 @@
         private System.Windows.Forms.Button BChange;
         private System.Windows.Forms.Button BDel;
         private System.Windows.Forms.ComboBox CBType;
+        private System.Windows.Forms.OpenFileDialog OFD;
+        private System.Windows.Forms.SaveFileDialog SVD;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem пососатьКакToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem раздвинутьToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem хуевПоглотатьToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem володяКучеренкоГейToolStripMenuItem;
     }
 }
 

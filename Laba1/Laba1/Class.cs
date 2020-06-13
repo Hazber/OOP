@@ -60,7 +60,7 @@ namespace Laba1
         {
             this.Volume = volume;
             this.BType = btype;
-           // this.Bottle = bottle;
+            // this.Bottle = bottle;TCategories
             this.Category = TCategories.Bottle;
         }
     }
@@ -104,9 +104,8 @@ namespace Laba1
     [Serializable]
     public class Low_Alcholol:UserDrink
     {
-        public Bottle Bottle;
-        public double Temperature;
 
+        public Bottle Bottle;
         public enum TFlavorin_additives
         {
 
@@ -128,7 +127,8 @@ namespace Laba1
         public string Recipe;
         public bool Aroma;
         public bool Fruit;
-        public Low_Alcholol(TFlavorin_additives flavorin_additives, TCooking_Method tcooking_method, string ingridients, string recipe, bool aroma, bool fruit, double degree, int year, string name, double price, int count, string country,Bottle bottle) : base(degree, year, name, price, count, country)
+        
+        public Low_Alcholol(Bottle bottle,TFlavorin_additives flavorin_additives, TCooking_Method tcooking_method, string ingridients, string recipe, bool aroma, bool fruit, double degree, int year, string name, double price, int count, string country) : base(degree, year, name, price, count, country)
         {
             this.Flavorin_Additives = flavorin_additives;
             this.Cooking_Method = tcooking_method;

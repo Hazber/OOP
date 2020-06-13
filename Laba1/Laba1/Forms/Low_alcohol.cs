@@ -95,7 +95,7 @@ namespace Laba1.Forms
             object[] value = FMenu.GetCommonData(TBName, TBPrice, TBCount, TBCountry);
             if (value != null)
             {
-                Low_Alcholol Low_alcholol = new Low_Alcholol(flavorin_additives, cooking_method, ingr,recipe,aroma,fruit, degree, year, (string)value[0], (double)value[1], (int)value[2], (string)value[3], botle);
+                Low_Alcholol Low_alcholol = new Low_Alcholol(botle,flavorin_additives, cooking_method, ingr,recipe,aroma,fruit, degree, year, (string)value[0], (double)value[1], (int)value[2], (string)value[3]);
                 Add_Display(Low_alcholol, ObjectIndex);
                 this.Close();
             }
