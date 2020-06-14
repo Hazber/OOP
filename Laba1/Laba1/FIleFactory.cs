@@ -7,6 +7,7 @@ using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using Newtonsoft.Json;
 using System.Reflection;
+using System.Xml.Serialization;
 
 namespace Laba1
 {
@@ -15,7 +16,7 @@ namespace Laba1
         public abstract byte[] FileSave(List<Item> catalog);
         public abstract List<Item> FileOpen(byte[] data);
     }
-    public class BinFileCreator : FileCreator
+    public class BinaryFileCreator : FileCreator
     {
         public override byte[] FileSave(List<Item> catalog)
         {
@@ -52,7 +53,7 @@ namespace Laba1
         }
     }
 
-    public class TextFileCreator : FileCreator
+    public class AuthorFileCreator : FileCreator
     {
         public override byte[] FileSave(List<Item> Catalog)
         {
@@ -84,7 +85,6 @@ namespace Laba1
             Item item = (Item)obj;
             Type type = Type.GetType("Laba1." + item.Category.ToString(), false, true);
             str += type.ToString() + "{";
-            int i = 0;
             foreach (FieldInfo param in type.GetFields())
             {
                 if (param.FieldType.ToString().IndexOf("Laba1.") > -1 && param.FieldType.ToString().IndexOf("+") <= -1)
@@ -101,7 +101,7 @@ namespace Laba1
         private static Type FieldType(ref string str, int ind)
         {
             Type objtype = Type.GetType(str.Substring(0, ind), false, true);
-            str = str.Remove(0, ind + 1);
+            str = str.Remove(0, ind + 1);//удаляем тип из строки
             return objtype;
         }
 
@@ -119,7 +119,7 @@ namespace Laba1
             int index0 = str.IndexOf('{');
             Type objtype = FieldType(ref str, index0);
             FieldInfo[] fields = objtype.GetFields();
-            Type[] types = new Type[fields.Length-1];
+            Type[] types = new Type[fields.Length-1]; //чтобы првоерить к чему приводить значения
             Type t;
             object[] values = new object[fields.Length-1];
             int i = 0;

@@ -13,18 +13,19 @@ namespace Laba1
 {
     public partial class FMenu : Form
     {
-
+        public static Plugin _curr_Plugin = null;
         public static FMenu window = null;
         public static List<Item> Catalog = new List<Item>();
         public delegate void UpdateMethod(object obj, int index);
         private static string[] Names = { "Name",  "Category","Price", "Count", "Country" };
         private static int[] Length = { 200, 160, 120, 150, 150 };
         public static Creator[] Creators = { new BottleCreator(), new High_AlchololCreator(), new Low_AlchololCreator(), new Medium_AlchololCreator(), new UserDrinkCreator() };
-        public static FileCreator[] FileCreators = { new BinFileCreator(), new JsonFileCreator(), new TextFileCreator() };
+        public static FileCreator[] FileCreators = { new BinaryFileCreator(), new JsonFileCreator(), new AuthorFileCreator() };
         public FMenu()
         {
             InitializeComponent();
             window = this;
+           
             ColumnHeader header;
             for (int index = 0; index < 5; index++)
             {
@@ -183,29 +184,64 @@ namespace Laba1
 
         private void ПососатьКакToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (SVD.ShowDialog() == DialogResult.Cancel)
+         /*   if (SVD.ShowDialog() == DialogResult.Cancel)
                 return;
             string filename = SVD.FileName;
             byte[] data = FileCreators[SVD.FilterIndex - 1].FileSave(Catalog);
             using (FileStream fs = new FileStream(filename, FileMode.Create))
             {
                 fs.Write(data, 0, data.Length);
-            }
+            }*/
+
+            if (SVD.ShowDialog() == DialogResult.Cancel)
+                return;
+            string filename = SVD.FileName;
+            byte[] data = FileCreators[SVD.FilterIndex - 1].FileSave(Catalog);
+            PluginForm pluginForm = new PluginForm(data, filename);
+            pluginForm.Show();
         }
 
         private void РаздвинутьToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            /*  if (OFD.ShowDialog() == DialogResult.Cancel)
+                  return;
+              string filename = OFD.FileName;
+              byte[] data = null;
+              using (FileStream fs = new FileStream(filename, FileMode.Open))
+              {
+                  data = new byte[(int)fs.Length];
+                  fs.Read(data, 0, data.Length);
+              }
+              Catalog = FileCreators[OFD.FilterIndex - 1].FileOpen(data);
+              ShowListView();
+  */
             if (OFD.ShowDialog() == DialogResult.Cancel)
                 return;
             string filename = OFD.FileName;
+            byte[] serialized = null;
             byte[] data = null;
             using (FileStream fs = new FileStream(filename, FileMode.Open))
             {
-                data = new byte[(int)fs.Length];
-                fs.Read(data, 0, data.Length);
+                serialized = new byte[(int)fs.Length];
+                fs.Read(serialized, 0, serialized.Length);
+            }
+            int res = Plugin.FindPlugin(filename);
+
+            switch (res)
+            {
+                case -1:
+                    MessageBox.Show("Соответствующий плагин отсутствует!!!");
+                    return;
+                case 1:
+                    data = Plugin.ActivatePlugin(FMenu._curr_Plugin, serialized, false);
+                    break;
+                case 0:
+                    data = serialized;
+                    break;
             }
             Catalog = FileCreators[OFD.FilterIndex - 1].FileOpen(data);
             ShowListView();
+
         }
 
         private void ToolStripMenuItem1_Click(object sender, EventArgs e)
