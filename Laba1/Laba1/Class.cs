@@ -31,7 +31,7 @@ namespace Laba1
     [Serializable]
     public class UserDrink:Item
     {
-        
+        //Test
         public double Degree;
         public int Year;
 
